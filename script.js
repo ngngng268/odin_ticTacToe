@@ -8,13 +8,12 @@ function ticTacToe() {
         board[i] = " ";
     } //set all cell to "none"
     let game = "over";
-    const boardDiv = document.querySelector(".board");
-    const cellNodeList = boardDiv.querySelectorAll("div.cell");
+    const cellNodeList = document.querySelectorAll("div.cell");
     const cellArr = Array.from(cellNodeList);
     console.log(cellArr);
-    /*for (i = 0; i <= 8; i++) {
+    for (i = 0; i <= 8; i++) {
         cellArr[i].textContent = board[i]
-    }*/
+    };
     function reset() {
         game = "over";
         for (i = 0; i <= 8; i++) {
@@ -29,6 +28,7 @@ function ticTacToe() {
     }; //reset function
 
     function display(content) {
+        const bannerDiv = document.querySelector(".display");
         bannerDiv.textContent = content;
     } //display content on taskbar
     const player = function (name, mark) {
@@ -39,15 +39,16 @@ function ticTacToe() {
     const player1 = new player("First", "x");
     const player2 = new player("Second", "O");// need new button to open new dialog to enter new player name
     console.log(player1);
-    function cell(mark) {
-        target.textContent = mark;
-        lastMark = mark;
-        board[target.id] = mark
-    }
-    function clickOnCell() {
+
+    function clickOnCell(element) {
         if (game === "over") {
             game = "onGoing";
         };
+        function cell(mark) {
+            element.textContent = mark;
+            lastMark = mark;
+            board[`${element.id}`] = mark
+        }
         if ((lastMark === "none")
             || (lastMark === player2.mark)) {
             cell(player1.mark)
@@ -100,7 +101,12 @@ function ticTacToe() {
             display(`It was a draw. Play again?`);
             reset();
             gamePlayed = gamePlayed + 1;
-        }
-    }
+        };
+        console.log(lastMark);
+        console.log(board);
+    };
+    cellArr.forEach(element => {
+        element.addEventListener("click", function () { clickOnCell(element) })
+    });
 }
 ticTacToe()
