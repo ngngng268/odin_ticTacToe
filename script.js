@@ -25,7 +25,15 @@ function ticTacToe() {
         for (i = 0; i <= 8; i++) {
             cellArr[i].textContent = board[i];
         };
+        display();
     }; //reset function
+
+    function newPlayerReset() {
+        reset();
+        player1.score = 0;
+        player2.score = 0;
+
+    }
 
     function display(content) {
         const bannerDiv = document.querySelector(".display");
@@ -42,6 +50,7 @@ function ticTacToe() {
 
     function clickOnCell(element) {
         if (game === "over") {
+            reset();
             game = "onGoing";
         };
         function cell(mark) {
@@ -49,13 +58,16 @@ function ticTacToe() {
             lastMark = mark;
             board[`${element.id}`] = mark
         }
-        if ((lastMark === "none")
-            || (lastMark === player2.mark)) {
-            cell(player1.mark)
-        } else if (lastMark === player1.mark) {
-            cell(player2.mark)
-        }
-        cellMarked = cellMarked + 1
+        if (element.textContent == " ") {
+            if ((lastMark === "none")
+                || (lastMark === player2.mark)) {
+                cell(player1.mark)
+            } else if (lastMark === player1.mark) {
+                cell(player2.mark)
+            };
+            cellMarked = cellMarked + 1
+        };
+        
         if ((lastMark !== "none") &&
             (((board[0] === board[1])
                 && (board[1] === board[2])
@@ -93,14 +105,15 @@ function ticTacToe() {
 
             display(`Congratulations!! ${winner.name} is the winner of this game!!!!!`);
             gamePlayed = gamePlayed + 1;
-            reset();
+            game = "over";
+            ;
 
         } else if ((lastMark !== "none") && (cellMarked === 9)) {
             player1.score = player1.score + 1;
             player2.score = player2.score + 1;
             display(`It was a draw. Play again?`);
-            reset();
             gamePlayed = gamePlayed + 1;
+            game = "over";
         };
         console.log(lastMark);
         console.log(board);
