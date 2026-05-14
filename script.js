@@ -56,9 +56,9 @@ function ticTacToe() {
     const player2 = new player(`${name2.value}`, `${mark2.value}`);// need new button to open new dialog to enter new player name
     console.log(player1);
 
-    function scoreDisplay () {
-        score1.textContent = player1.score ;
-        score2.textContent = player2.score ;
+    function scoreDisplay() {
+        score1.textContent = player1.score;
+        score2.textContent = player2.score;
     }
     scoreDisplay();
 
@@ -70,7 +70,7 @@ function ticTacToe() {
             && (player2.name === name2.value)
             && (player1.name === name1.value)
         ) { display("Despite everything, it's still you!") }
-        if (
+        else if (
             (name1.value === name2.value)
             || (mark1.value === mark2.value)
         ) { display("Different players, different marks, please!") }
@@ -85,7 +85,7 @@ function ticTacToe() {
                 player1.name = name1.value;
                 newPlayerReset();
                 display("NEW PLAYER, NEW GAME!!")
-            }
+            };
         }
         console.log(player1);
         console.log(player2);
