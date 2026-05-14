@@ -78,6 +78,7 @@ function ticTacToe() {
             if ((mark1.value !== player1.mark) || (mark2.value !== player2.mark)) {
                 player1.mark = mark1.value;
                 player2.mark = mark2.value;
+                reset();
                 display("Info changed successfully");
             };
             if ((name1.value !== player1.name) || (name2.value !== player2.name)) {
